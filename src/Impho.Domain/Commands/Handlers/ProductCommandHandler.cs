@@ -62,7 +62,7 @@ namespace Impho.Domain.Commands.Handlers
             {
                 foreach (var error in command.ValidationResult.Errors)
                 {
-                    await _notificationHandler.Handle(new DomainNotification(error.ErrorCode, error.CustomState.ToString() ?? "", error.ErrorMessage), cancellationToken);
+                    await _notificationHandler.Handle(new DomainNotification(error.ErrorCode, "", error.ErrorMessage), cancellationToken);
                 }
                 return false;
             }

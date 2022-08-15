@@ -49,5 +49,24 @@ namespace Impho.Core.Extensions
 
             throw new InvalidOperationException();
         }
+
+        public static bool IsAnEnumDisplayName<T>(string name) where T : Enum
+        {
+            foreach (var item in Enum.GetValues(typeof(T)))
+            {
+                var itemEnum = (T)item;
+
+                if (itemEnum != null)
+                {
+                    var itemEnumName = itemEnum.GetEnumDisplayName();
+                    if (itemEnumName == name)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 }
