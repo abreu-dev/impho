@@ -17,6 +17,7 @@ namespace Impho.Application
         public static void Queries(IServiceCollection services)
         {
             services.AddScoped<IQueryHandler<PagedProductsQuery, IPagedList<ProductDto>>, ProductQueryHandler>();
+            services.AddScoped<IQueryHandler<ExportProductsQuery, IEnumerable<ProductForExportDto>>, ProductQueryHandler>();
         }
     }
 }

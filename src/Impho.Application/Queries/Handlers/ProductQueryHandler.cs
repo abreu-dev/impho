@@ -10,7 +10,8 @@ using Impho.Infra.Data.Entities;
 namespace Impho.Application.Queries.Handlers
 {
     public class ProductQueryHandler :
-        IQueryHandler<PagedProductsQuery, IPagedList<ProductDto>>
+        IQueryHandler<PagedProductsQuery, IPagedList<ProductDto>>,
+        IQueryHandler<ExportProductsQuery, IEnumerable<ProductForExportDto>>
     {
         private readonly IImphoContext _context;
 
@@ -43,6 +44,27 @@ namespace Impho.Application.Queries.Handlers
                         .ToList();
 
             return new PagedList<ProductDto>(dtos, totalItems, query.Parameters.Page, query.Parameters.Size);
+        }
+
+        public async Task<IEnumerable<ProductForExportDto>> Handle(ExportProductsQuery query, CancellationToken cancellationToken)
+        {
+            var source = _context.Query<ProductData>();
+
+            source = source.OrderBy(p => p.Name);
+
+            var dtos = (from product in source
+                        select new ProductForExportDto()
+                        {
+                            Name = product.Name,
+                            Description = product.Description,
+                            QuantityAvailable = product.QuantityAvailable,
+                            UnitOfMeasurement = product.UnitOfMeasurement.GetEnumDisplayName(),
+                            CurrencyValue = product.CurrencyValue,
+                            CurrencyCode = product.CurrencyCode,
+                        })
+                        .ToList();
+
+            return dtos;
         }
     }
 }

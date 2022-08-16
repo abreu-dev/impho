@@ -1,4 +1,5 @@
-﻿using Impho.Application.Contracts;
+﻿using Impho.Api.Export;
+using Impho.Application.Contracts;
 using Impho.Application.Parameters;
 using Impho.Application.Queries.ProductQueries;
 using Impho.Core.Data.Pagination.Interfaces;
@@ -27,12 +28,28 @@ namespace Impho.Api.Controllers
             return Ok(await _queryDispatcher.Dispatch<PagedProductsQuery, IPagedList<ProductDto>>(query, CancellationToken.None));
         }
 
+        [HttpGet]
+        [Route("api/products:export")]
+        public async Task<IActionResult> Export()
+        {
+            var query = new ExportProductsQuery();
+            var products = await _queryDispatcher.Dispatch<ExportProductsQuery, IEnumerable<ProductForExportDto>>(query, CancellationToken.None);
+            return new ProductCsvResult(products, "products.csv");
+        }
+
         [HttpPost]
         [Route("api/products")]
         public async Task<IActionResult> Post([FromBody] ProductCreationDto creationDto)
         {
             var command = new AddProductCommand(creationDto.Name, creationDto.Description, creationDto.QuantityAvailable, creationDto.UnitOfMeasurement, creationDto.CurrencyValue, creationDto.CurrencyCode);
             await _commandDispatcher.Dispatch(command, CancellationToken.None);
+            return NoContent();
+        }
+
+        [HttpPost]
+        [Route("api/products:import")]
+        public async Task<IActionResult> Import()
+        {
             return NoContent();
         }
 

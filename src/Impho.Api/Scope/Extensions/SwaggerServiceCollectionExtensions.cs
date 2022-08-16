@@ -11,37 +11,8 @@ namespace Impho.Api.Scope.Extensions
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Impho"
-                });
-
-                var folder = AppContext.BaseDirectory;
-                foreach (var file in Directory.GetFiles(folder, "*.xml", SearchOption.AllDirectories))
-                {
-                    options.IncludeXmlComments(filePath: file);
-                }
-
-                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Description = "JWT Imphorization header using the Bearer scheme (Example: 'Bearer 12345abcdef')",
-                    Name = "Imphorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
-                });
-
-                options.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            }
-                        },
-                        Array.Empty<string>()
-                    }
+                    Title = "Impho",
+                    Description = "Impho Api"
                 });
             });
         }
