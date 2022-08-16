@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Impho.Application\Impho.Application.csproj" />
+    <ProjectReference Include="..\Impho.Export\Impho.Export.csproj" />
   </ItemGroup>
 
 </Project>

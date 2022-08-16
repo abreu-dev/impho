@@ -1,8 +1,8 @@
-﻿using Impho.Api.Export;
-using Impho.Application.Contracts;
+﻿using Impho.Application.Contracts;
 using Impho.Application.Parameters;
 using Impho.Application.Queries.ProductQueries;
 using Impho.Core.Data.Pagination.Interfaces;
+using Impho.Core.Exporter.Csv;
 using Impho.Core.Messaging.Dispatchers.Interfaces;
 using Impho.Domain.Commands.ProductCommands;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +13,15 @@ namespace Impho.Api.Controllers
     {
         private readonly IQueryDispatcher _queryDispatcher;
         private readonly ICommandDispatcher _commandDispatcher;
+        private readonly IDataCsvExporter _dataCsvExporter;
 
-        public ProductsController(IQueryDispatcher queryDispatcher, ICommandDispatcher commandDispatcher)
+        public ProductsController(IQueryDispatcher queryDispatcher,
+                                 ICommandDispatcher commandDispatcher,
+                                 IDataCsvExporter dataCsvExporter)
         {
             _queryDispatcher = queryDispatcher;
             _commandDispatcher = commandDispatcher;
+            _dataCsvExporter = dataCsvExporter;
         }
 
         [HttpGet]
@@ -34,7 +38,8 @@ namespace Impho.Api.Controllers
         {
             var query = new ExportProductsQuery();
             var products = await _queryDispatcher.Dispatch<ExportProductsQuery, IEnumerable<ProductForExportDto>>(query, CancellationToken.None);
-            return new ProductCsvResult(products, "products.csv");
+
+            return CsvFileResult(_dataCsvExporter.Export(products, "products.csv"));
         }
 
         [HttpPost]
