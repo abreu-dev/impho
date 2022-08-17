@@ -1,14 +1,14 @@
-﻿using CsvHelper;
-using CsvHelper.Configuration;
-using Impho.Application.Contracts;
+﻿using Impho.Application.Contracts;
 using Impho.Application.Parameters;
 using Impho.Application.Queries.ProductQueries;
 using Impho.Core.Data.Pagination.Interfaces;
 using Impho.Core.Exporter.Csv;
 using Impho.Core.Messaging.Dispatchers.Interfaces;
 using Impho.Domain.Commands.ProductCommands;
+using Impho.Import.Entities;
+using Impho.Import.Mappings;
+using Impho.Import.Readers;
 using Microsoft.AspNetCore.Mvc;
-using System.Globalization;
 
 namespace Impho.Api.Controllers
 {
@@ -60,19 +60,9 @@ namespace Impho.Api.Controllers
         {
             using var memoryStream = new MemoryStream(new byte[file.Length]);
             await file.CopyToAsync(memoryStream);
-            memoryStream.Position = 0;
 
-            var configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                Delimiter = ";"
-            };
-
-            using (var reader = new StreamReader(memoryStream))
-            using (var csvReader = new CsvReader(reader, configuration))
-            {
-                csvReader.Context.RegisterClassMap<ProductCsvMap>();
-                var records = csvReader.GetRecords<ProductForExportDto>().ToList();
-            }
+            var reader = new CsvReader<ProductForImportDto, ProductForImportDtoMap>();
+            var returned = await reader.Process(memoryStream.ToArray());
 
             return NoContent();
         }
@@ -93,19 +83,6 @@ namespace Impho.Api.Controllers
             var command = new RemoveProductCommand(id);
             await _commandDispatcher.Dispatch(command, CancellationToken.None);
             return NoContent();
-        }
-
-        public class ProductCsvMap : ClassMap<ProductForExportDto>
-        {
-            public ProductCsvMap()
-            {
-                Map(x => x.Name).Index(0);
-                Map(x => x.Description).Index(1);
-                Map(x => x.QuantityAvailable).Index(2);
-                Map(x => x.UnitOfMeasurement).Index(3);
-                Map(x => x.CurrencyValue).Index(4);
-                Map(x => x.CurrencyCode).Index(5);
-            }
         }
     }
 }

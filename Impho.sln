@@ -7,17 +7,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4D581E82-20C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E14FCC5E-48C2-42D6-98EB-E1AD0A82ACBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impho.Core", "src\Impho.Core\Impho.Core.csproj", "{8BF396FA-A6EE-401D-A44B-FC31D30FFB5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impho.Core", "src\Impho.Core\Impho.Core.csproj", "{8BF396FA-A6EE-401D-A44B-FC31D30FFB5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impho.Domain", "src\Impho.Domain\Impho.Domain.csproj", "{B25F8786-1BCC-4D17-9369-A2436D0C8881}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impho.Domain", "src\Impho.Domain\Impho.Domain.csproj", "{B25F8786-1BCC-4D17-9369-A2436D0C8881}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impho.Infra.Data", "src\Impho.Infra.Data\Impho.Infra.Data.csproj", "{F9EF625D-CA91-43DC-BF46-3C6D0F0D6CC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impho.Infra.Data", "src\Impho.Infra.Data\Impho.Infra.Data.csproj", "{F9EF625D-CA91-43DC-BF46-3C6D0F0D6CC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impho.Application", "src\Impho.Application\Impho.Application.csproj", "{1CB15FB8-DA3B-4B84-B5B5-BD0C4475FD18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impho.Application", "src\Impho.Application\Impho.Application.csproj", "{1CB15FB8-DA3B-4B84-B5B5-BD0C4475FD18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impho.Api", "src\Impho.Api\Impho.Api.csproj", "{44FE8A4C-6D98-452B-A54F-13D3C0B00EDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impho.Api", "src\Impho.Api\Impho.Api.csproj", "{44FE8A4C-6D98-452B-A54F-13D3C0B00EDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impho.Export", "src\Impho.Export\Impho.Export.csproj", "{42D08C8E-B128-4E3C-9445-E07793D422F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impho.Export", "src\Impho.Export\Impho.Export.csproj", "{42D08C8E-B128-4E3C-9445-E07793D422F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impho.Import", "src\Impho.Import\Impho.Import.csproj", "{15E6CC2E-C50E-4255-BED5-510530AB0456}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{42D08C8E-B128-4E3C-9445-E07793D422F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42D08C8E-B128-4E3C-9445-E07793D422F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42D08C8E-B128-4E3C-9445-E07793D422F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E6CC2E-C50E-4255-BED5-510530AB0456}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E6CC2E-C50E-4255-BED5-510530AB0456}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E6CC2E-C50E-4255-BED5-510530AB0456}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E6CC2E-C50E-4255-BED5-510530AB0456}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{1CB15FB8-DA3B-4B84-B5B5-BD0C4475FD18} = {4D581E82-20C9-47B4-9A60-D07BE053C551}
 		{44FE8A4C-6D98-452B-A54F-13D3C0B00EDF} = {4D581E82-20C9-47B4-9A60-D07BE053C551}
 		{42D08C8E-B128-4E3C-9445-E07793D422F8} = {4D581E82-20C9-47B4-9A60-D07BE053C551}
+		{15E6CC2E-C50E-4255-BED5-510530AB0456} = {4D581E82-20C9-47B4-9A60-D07BE053C551}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5253103D-2C6A-4096-B506-FB54B7DE3F10}
